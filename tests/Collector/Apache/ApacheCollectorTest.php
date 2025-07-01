@@ -1,0 +1,39 @@
+<?php
+
+namespace Jmonitor\Tests\Collector\Apache;
+
+use Jmonitor\Collector\Apache\ApacheCollector;
+use PHPUnit\Framework\TestCase;
+
+class ApacheCollectorTest extends TestCase
+{
+    public function testCollect()
+    {
+        $collector = new ApacheCollector(__DIR__.'/_fake_mod_status_content.txt');
+        $this->assertSame(1, $collector->getVersion());
+
+        $metrics = $collector->collect();
+
+        $this->assertIsArray($metrics);
+
+        $this->assertSame('Apache/123', $metrics['server_version']);
+        $this->assertSame('Prefork', $metrics['server_mpm']);
+        $this->assertSame(129, $metrics['uptime']);
+        $this->assertSame(1.0, $metrics['load1']);
+        $this->assertSame(2.0, $metrics['load5']);
+        $this->assertSame(3.1, $metrics['load15']);
+        $this->assertSame(8, $metrics['total_accesses']);
+        $this->assertSame(5120, $metrics['total_bytes']);
+        $this->assertSame(0, $metrics['requests_per_second']);
+        $this->assertSame(39, $metrics['bytes_per_second']);
+        $this->assertSame(640, $metrics['bytes_per_request']);
+        $this->assertSame(14, $metrics['duration_per_request']);
+        $this->assertSame(3, $metrics['workers']['busy']);
+        $this->assertSame(61, $metrics['workers']['idle']);
+        $this->assertSame([
+            '_' => 61,
+            'R' => 2,
+            'W' => 1,
+        ], $metrics['scoreboard']);
+    }
+}

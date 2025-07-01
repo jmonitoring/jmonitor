@@ -39,20 +39,23 @@ class Client
     public function __construct(string $projectApiKey, ?ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?? Psr18ClientDiscovery::find();
-        $this->messageFactory = $factory ?? ($this->httpClient instanceof RequestFactoryInterface && $this->httpClient instanceof StreamFactoryInterface ? $this->httpClient : new Psr17Factory());
+        $this->messageFactory = $this->httpClient instanceof RequestFactoryInterface && $this->httpClient instanceof StreamFactoryInterface ? $this->httpClient : new Psr17Factory();
         $this->projectApiKey = $projectApiKey;
 
-        $this->baseUrl = $env['JMONITOR_COLLECTOR_URL'] ?? self::BASE_URL;
+        $this->baseUrl = $_ENV['JMONITOR_COLLECTOR_URL'] ?? self::BASE_URL;
         $this->baseUrl = rtrim($this->baseUrl, '/');
     }
 
-    public function sendMetrics(array $metrics): void
+    public function sendMetrics(mixed $metrics): void
     {
         $request = $this->createRequest('POST', $this->baseUrl.'/metrics', $this->buildHeaders(), json_encode($metrics));
         $response = $this->sendRequest($request);
         // $jsonResponse = json_decode($response, true);
     }
 
+    /**
+     * @param array<string, string|string[]> $headers
+     */
     private function createRequest(string $method, string $uri, array $headers = [], ?string $body = null): RequestInterface
     {
         $request = $this->messageFactory->createRequest($method, $uri);
@@ -87,6 +90,9 @@ class Client
         return (string) $response->getBody();
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function buildHeaders(): array
     {
         return [
