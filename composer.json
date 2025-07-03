@@ -16,12 +16,18 @@
         "psr/http-factory-implementation": "*"
     },
     "require-dev": {
+        "ext-pdo": "*",
+        "doctrine/dbal": "^4.2",
         "nyholm/psr7": "^1.8",
         "php-http/message": "^1.0",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^11.5",
         "psr/http-client": "^1.0",
         "symfony/http-client": "^5.4.45 || ^6.4 || ^7.0"
+    },
+    "suggest": {
+        "ext-pdo": "If you want to collect mysql datas with Pdo as driver.",
+        "doctrine/dbal": "If you want to collect mysql datas with Doctrine DBAL as driver."
     },
     "autoload": {
         "psr-4": {

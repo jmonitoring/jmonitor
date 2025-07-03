@@ -76,7 +76,7 @@ class ApacheCollector implements CollectorInterface
         $content = $this->getModStatusContent();
 
         if (!$content) {
-            throw new CollectorException($this, 'Could not fetch data from ' . $this->modStatusUrl);
+            throw new CollectorException('Could not fetch data from ' . $this->modStatusUrl, __CLASS__);
         }
 
         $lines = explode("\n", $content);

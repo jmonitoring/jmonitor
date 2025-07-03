@@ -7,12 +7,19 @@ use PHPUnit\Framework\TestCase;
 
 class ApacheCollectorTest extends TestCase
 {
-    public function testCollect()
-    {
-        $collector = new ApacheCollector(__DIR__.'/_fake_mod_status_content.txt');
-        $this->assertSame(1, $collector->getVersion());
+    /**
+     * @var ApacheCollector
+     */
+    private $collector;
 
-        $metrics = $collector->collect();
+    public function setUp(): void
+    {
+        $this->collector = new ApacheCollector(__DIR__.'/_fake_mod_status_content.txt');
+    }
+
+    public function testCollect(): void
+    {
+        $metrics = $this->collector->collect();
 
         $this->assertIsArray($metrics);
 
@@ -35,5 +42,10 @@ class ApacheCollectorTest extends TestCase
             'R' => 2,
             'W' => 1,
         ], $metrics['scoreboard']);
+    }
+
+    public function testGetVersion(): void
+    {
+        $this->assertSame(1, $this->collector->getVersion());
     }
 }
