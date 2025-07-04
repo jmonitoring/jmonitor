@@ -53,6 +53,7 @@ class ApacheCollector implements CollectorInterface
                 'idle' => (int) $this->getData('IdleWorkers'),
             ],
             'scoreboard' => $this->parseScoreboard($this->getData('Scoreboard')),
+            'modules' => $this->getApacheModules(),
         ];
     }
 
@@ -104,5 +105,14 @@ class ApacheCollector implements CollectorInterface
         }
 
         return $result;
+    }
+
+    private function getApacheModules(): array
+    {
+        if (!function_exists('\apache_get_modules')) {
+            return [];
+        }
+
+        return \apache_get_modules();
     }
 }
