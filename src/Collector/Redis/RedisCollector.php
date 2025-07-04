@@ -6,7 +6,6 @@ namespace Jmonitor\Collector\Redis;
 
 use Jmonitor\Collector\CollectorInterface;
 use Jmonitor\Exceptions\CollectorException;
-use Predis\Response\Error;
 use Relay\Relay;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 
@@ -25,18 +24,17 @@ class RedisCollector implements CollectorInterface
 
     public function collect(): array
     {
-        $infos = $this->redis->info();
-//        print_r($infos);die;
+        try {
+            $infos = $this->redis->info();
+        } catch (\Throwable $e) {
+            throw new CollectorException('Redis exception: ' . $e->getMessage(), __CLASS__, $e);
+        }
+
         if (!$infos) {
             return [];
         }
 
-        if ($infos instanceof Error) {
-            throw new CollectorException('Redis connection error: ' . $infos->getMessage(), __CLASS__);
-        }
-
         $infos = $this->flatten($infos);
-//        print_r($infos);die;
 
         return [
             'server' => [

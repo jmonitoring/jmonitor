@@ -9,8 +9,8 @@ namespace Jmonitor\Exceptions;
  */
 class CollectorException extends JmonitorException
 {
-    public function __construct(string $message, string $collectorFqcn)
+    public function __construct(string $message, string $collectorFqcn, ?\Throwable $previous = null)
     {
-        parent::__construct(sprintf('Collector %s failed: %s', $collectorFqcn, $message));
+        parent::__construct(sprintf('Collector %s failed: %s', $collectorFqcn, $message), 0, $previous);
     }
 }
