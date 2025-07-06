@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Jmonitor\Collector\Php;
 
-use Jmonitor\Collector\CollectorInterface;
+use Jmonitor\Collector\AbstractCollector;
 
-class PhpCollector implements CollectorInterface
+class PhpCollector extends AbstractCollector
 {
     private ?string $fpmStatusUrl;
 

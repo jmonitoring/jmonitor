@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Jmonitor\Collector\Apache;
 
-use Jmonitor\Collector\CollectorInterface;
+use Jmonitor\Collector\AbstractCollector;
 use Jmonitor\Exceptions\CollectorException;
 
 /**
  * Collects metrics using the Apache mod_status module.
  */
-class ApacheCollector implements CollectorInterface
+class ApacheCollector extends AbstractCollector
 {
     private string $modStatusUrl;
 

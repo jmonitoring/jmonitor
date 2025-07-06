@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Jmonitor\Collector\Mysql;
 
-use Jmonitor\Collector\CollectorInterface;
+use Jmonitor\Collector\AbstractCollector;
 use Jmonitor\Mysql\MysqlAdapterInterface;
 
-class MysqlStatusCollector implements CollectorInterface
+class MysqlStatusCollector extends AbstractCollector
 {
     private MysqlAdapterInterface $db;
 
