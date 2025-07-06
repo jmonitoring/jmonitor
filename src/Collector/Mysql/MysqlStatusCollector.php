@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Jmonitor\Collector\Mysql;
 
 use Jmonitor\Collector\AbstractCollector;
-use Jmonitor\Mysql\MysqlAdapterInterface;
+use Jmonitor\Collector\Mysql\Adapter\MysqlAdapterInterface;
 
 class MysqlStatusCollector extends AbstractCollector
 {

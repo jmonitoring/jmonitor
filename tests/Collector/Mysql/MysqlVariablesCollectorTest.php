@@ -2,8 +2,8 @@
 
 namespace Jmonitor\Tests\Collector\Mysql;
 
+use Jmonitor\Collector\Mysql\Adapter\MysqlAdapterInterface;
 use Jmonitor\Collector\Mysql\MysqlVariablesCollector;
-use Jmonitor\Mysql\MysqlAdapterInterface;
 use PHPUnit\Framework\TestCase;
 
 class MysqlVariablesCollectorTest extends TestCase

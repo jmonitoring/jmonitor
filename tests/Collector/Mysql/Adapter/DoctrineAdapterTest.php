@@ -1,9 +1,9 @@
 <?php
 
-namespace Jmonitor\Tests\Mysql;
+namespace Jmonitor\Tests\Collector\Mysql\Adapter;
 
 use Doctrine\DBAL\Connection;
-use Jmonitor\Mysql\DoctrineAdapter;
+use Jmonitor\Collector\Mysql\Adapter\DoctrineAdapter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

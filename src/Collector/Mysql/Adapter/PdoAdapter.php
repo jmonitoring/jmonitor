@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Jmonitor\Mysql;
+namespace Jmonitor\Collector\Mysql\Adapter;
 
 use Jmonitor\Exceptions\CollectorException;
 

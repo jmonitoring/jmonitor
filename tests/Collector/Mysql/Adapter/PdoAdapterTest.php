@@ -1,8 +1,8 @@
 <?php
 
-namespace Jmonitor\Tests\Mysql;
+namespace Jmonitor\Tests\Collector\Mysql\Adapter;
 
-use Jmonitor\Mysql\PdoAdapter;
+use Jmonitor\Collector\Mysql\Adapter\PdoAdapter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
