@@ -6,6 +6,7 @@ namespace Jmonitor\Collector\System;
 
 use Jmonitor\Collector\AbstractCollector;
 use Jmonitor\Collector\System\Adapter\AdapterInterface;
+use Jmonitor\Collector\System\Adapter\LinuxAdapter;
 
 class SystemCollector extends AbstractCollector
 {
@@ -13,9 +14,9 @@ class SystemCollector extends AbstractCollector
 
     private array $longTermPropertyCache = [];
 
-    public function __construct(AdapterInterface $adapter)
+    public function __construct(?AdapterInterface $adapter = null)
     {
-        $this->adapter = $adapter;
+        $this->adapter = $adapter ?: $this->guessAdapter();
     }
 
     public function collect(): array
@@ -54,5 +55,20 @@ class SystemCollector extends AbstractCollector
     public function afterCollect(): void
     {
         $this->adapter->reset();
+    }
+
+    public function getName(): string
+    {
+        return 'system';
+    }
+
+    private function guessAdapter(): AdapterInterface
+    {
+        if (PHP_OS_FAMILY === 'Linux') {
+            return new LinuxAdapter();
+        }
+
+        // Add more OS-specific adapters as needed
+        throw new \RuntimeException(sprintf('No suitable system information adapter found for your OS family (%s). Feel free to open an issue on Github!', PHP_OS_FAMILY));
     }
 }

@@ -13,4 +13,6 @@ interface CollectorInterface
     public function afterCollect(): void;
 
     public function getVersion(): int;
+
+    public function getName(): string;
 }

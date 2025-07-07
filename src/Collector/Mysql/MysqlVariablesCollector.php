@@ -47,4 +47,9 @@ class MysqlVariablesCollector extends AbstractCollector
     {
         return 1;
     }
+
+    public function getName(): string
+    {
+        return 'mysql.variables';
+    }
 }

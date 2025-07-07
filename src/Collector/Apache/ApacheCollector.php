@@ -115,4 +115,9 @@ class ApacheCollector extends AbstractCollector
 
         return \apache_get_modules();
     }
+
+    public function getName(): string
+    {
+        return 'apache';
+    }
 }

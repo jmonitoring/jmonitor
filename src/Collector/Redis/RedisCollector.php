@@ -125,4 +125,9 @@ class RedisCollector extends AbstractCollector
             }
         }
     }
+
+    public function getName(): string
+    {
+        return 'redis';
+    }
 }

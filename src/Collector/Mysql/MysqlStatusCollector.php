@@ -42,4 +42,9 @@ class MysqlStatusCollector extends AbstractCollector
     {
         return 1;
     }
+
+    public function getName(): string
+    {
+        return 'mysql.status';
+    }
 }

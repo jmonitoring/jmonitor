@@ -76,4 +76,9 @@ class PhpCollector extends AbstractCollector
             'jit' => $status['jit'] ?? [],
         ];
     }
+
+    public function getName(): string
+    {
+        return 'php';
+    }
 }
