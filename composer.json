@@ -12,6 +12,7 @@
     "require": {
         "php": ">=8.0",
         "php-http/discovery": "^1.17",
+        "psr/http-client": "^1.0",
         "psr/http-client-implementation": "*",
         "psr/http-factory-implementation": "*"
     },
@@ -23,7 +24,6 @@
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^11.5",
         "predis/predis": "^3.0",
-        "psr/http-client": "^1.0",
         "symfony/http-client": "^5.4.45 || ^6.4 || ^7.0"
     },
     "suggest": {
