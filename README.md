@@ -6,17 +6,21 @@ Easy monitoring for PHP web server.
 Getting Started
 ---------------
 To get started, require the project using [Composer](https://getcomposer.org/).  
-You'll also need a Psr ClientInterface http client to send metrics to Jmonitor.
+
 
 ```bash
 composer require jmonitoring/jmonitor
+```
 
-# with symfony http client : 
+Optionnal : You'll also need a Psr\Http\Client\ClientInterface http client to send metrics to Jmonitor.
+```bash
+# with symfony http client :
 composer require symfony/http-client nyholm/psr7
 
-# or with guzzle 
+# or with guzzle
 composer require guzzlehttp/guzzle http-interop/http-factory-guzzle
 ```
+
 
 ```php
 use Jmonitor\Jmonitor;
@@ -24,24 +28,28 @@ use Jmonitor\Collector\Apache\ApacheCollector;
 
 $jmonitor = new Jmonitor('apiKey');
 
-// Add some collectors (see the documentation below for more collectors)
+// Add some collectors 
 $jmonitor->addCollector(new ApacheCollector('https://example.com/server-status'));
 $jmonitor->addCollector(new SystemCollector();
+// see the documentation below for more collectors
 
 // send metrics periodically to jmonitor (ex. every 15 seconds)
 $jmonitor->collect();
 ```
 
-You can use a custom HttpClient 
+[//]: # (You can use a custom HttpClient, for example if you want to use the Symfony HttpClient or Guzzle.)
 
+[//]: # ()
+[//]: # (```php)
 
+[//]: # (use Symfony\Component\HttpClient\Psr18Client;)
 
-```php
-use Psr\Http\Client\ClientInterface;
+[//]: # ()
+[//]: # ($client = new Psr18Client&#40;&#41;;)
 
-$client = new \GuzzleHttp\Client(); // or any PSR-18 compliant client
-$jmonitor = new Jmonitor('apiKey', $client);
-```
+[//]: # ($jmonitor = new Jmonitor&#40;'apiKey', $client&#41;;)
+
+[//]: # (```)
 
 Collectors
 -----------
@@ -100,7 +108,7 @@ Collectors
   ```php
   use Jmonitor\Collector\Php\PhpCollector
   
-  $collector = new PhpCollector($adapter);
+  $collector = new PhpCollector();
   ```
 
 - ### Redis

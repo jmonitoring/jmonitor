@@ -10,6 +10,7 @@ use Jmonitor\Exceptions\InvalidServerResponseException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 class Client
@@ -46,11 +47,11 @@ class Client
         $this->baseUrl = rtrim($this->baseUrl, '/');
     }
 
-    public function sendMetrics(mixed $metrics): void
+    public function sendMetrics(mixed $metrics): ResponseInterface
     {
         $request = $this->createRequest('POST', $this->baseUrl.'/metrics', $this->buildHeaders(), json_encode($metrics));
-        $response = $this->sendRequest($request);
-        // $jsonResponse = json_decode($response, true);
+
+        return $this->sendRequest($request);
     }
 
     /**
@@ -77,7 +78,7 @@ class Client
         return $request->withBody($stream);
     }
 
-    private function sendRequest(RequestInterface $request): string
+    private function sendRequest(RequestInterface $request): ResponseInterface
     {
         $response = $this->httpClient->sendRequest($request);
 
@@ -87,7 +88,7 @@ class Client
             throw new InvalidServerResponseException((string) $request->getUri(), $statusCode);
         }
 
-        return (string) $response->getBody();
+        return $response;
     }
 
     /**
