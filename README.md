@@ -30,7 +30,7 @@ $jmonitor = new Jmonitor('apiKey');
 
 // Add some collectors 
 $jmonitor->addCollector(new ApacheCollector('https://example.com/server-status'));
-$jmonitor->addCollector(new SystemCollector();
+$jmonitor->addCollector(new SystemCollector());
 // see the documentation below for more collectors
 
 // send metrics periodically to jmonitor (ex. every 15 seconds)

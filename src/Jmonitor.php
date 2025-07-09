@@ -6,6 +6,7 @@ namespace Jmonitor;
 
 use Jmonitor\Collector\CollectorInterface;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Jmonitor
 {
@@ -28,7 +29,7 @@ class Jmonitor
         $this->collectors[] = $collector;
     }
 
-    public function collect(): void
+    public function collect(): ResponseInterface
     {
         $metrics = [];
 
@@ -55,6 +56,6 @@ class Jmonitor
             throw new \RuntimeException('All collectors failed to collect data.'); // @phpstan-ignore-line
         }
 
-        $this->client->sendMetrics($metrics);
+        return $this->client->sendMetrics($metrics);
     }
 }
