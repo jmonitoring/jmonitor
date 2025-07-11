@@ -6,21 +6,11 @@ Easy monitoring for PHP web server.
 Getting Started
 ---------------
 To get started, require the project using [Composer](https://getcomposer.org/).  
-
+It should install for you a PSR-18 httpclient for you if you don't have one already.
 
 ```bash
 composer require jmonitoring/jmonitor
 ```
-
-Optionnal : You'll also need a Psr\Http\Client\ClientInterface http client to send metrics to Jmonitor.
-```bash
-# with symfony http client :
-composer require symfony/http-client nyholm/psr7
-
-# or with guzzle
-composer require guzzlehttp/guzzle http-interop/http-factory-guzzle
-```
-
 
 ```php
 use Jmonitor\Jmonitor;
@@ -37,19 +27,22 @@ $jmonitor->addCollector(new SystemCollector());
 $jmonitor->collect();
 ```
 
-[//]: # (You can use a custom HttpClient, for example if you want to use the Symfony HttpClient or Guzzle.)
 
-[//]: # ()
-[//]: # (```php)
+You can customize yout HttpClient, for example, if you want to use the [Symfony HttpClient](https://symfony.com/doc/current/http_client.html#psr-18-and-psr-17) or Guzzle.
 
-[//]: # (use Symfony\Component\HttpClient\Psr18Client;)
+```bash
+composer require symfony/http-client nyholm/psr7
+```
 
-[//]: # ()
-[//]: # ($client = new Psr18Client&#40;&#41;;)
+```php
+use Symfony\Component\HttpClient\Psr18Client;
 
-[//]: # ($jmonitor = new Jmonitor&#40;'apiKey', $client&#41;;)
+$httpClient = ... // create or retrieve your Symfony HttpClient instance
+$client = new Psr18Client()->withOptions(...);
 
-[//]: # (```)
+$jmonitor = new Jmonitor('apiKey', $client);
+
+```
 
 Collectors
 -----------
