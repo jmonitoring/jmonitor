@@ -38,7 +38,11 @@ class MysqlVariablesCollector extends AbstractCollector
         'thread_cache_size',        // a checker
         'table_open_cache',
     ];
-    private MysqlAdapterInterface $db;
+
+    /**
+     * @var MysqlAdapterInterface
+     */
+    private $db;
 
     public function __construct(MysqlAdapterInterface $db)
     {

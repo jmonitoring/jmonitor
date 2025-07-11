@@ -29,7 +29,7 @@ class Client
     /**
      * @var ClientInterface
      */
-    private ClientInterface $httpClient;
+    private $httpClient;
 
     /**
      * @var RequestFactoryInterface&StreamFactoryInterface
@@ -56,7 +56,10 @@ class Client
         $this->baseUrl = rtrim($this->baseUrl, '/');
     }
 
-    public function sendMetrics(mixed $metrics): ResponseInterface
+    /**
+     * @param mixed $metrics
+     */
+    public function sendMetrics($metrics): ResponseInterface
     {
         $request = $this->createRequest('POST', $this->baseUrl.'/metrics', $this->buildHeaders(), json_encode($metrics));
 

@@ -24,9 +24,12 @@ class Jmonitor
     /**
      * @var CollectorInterface[]
      */
-    private array $collectors = [];
+    private $collectors = [];
 
-    private Client $client;
+    /**
+     * @var Client
+     */
+    private $client;
 
     public function __construct(string $projectApiKey, ?ClientInterface $httpClient = null)
     {

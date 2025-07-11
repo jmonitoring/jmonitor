@@ -15,7 +15,10 @@ namespace Jmonitor\Collector\System\Adapter;
 
 class LinuxAdapter implements AdapterInterface
 {
-    private array $propertyCache = [];
+    /**
+     * @var array
+     */
+    private $propertyCache = [];
 
     public function getDiskTotalSpace(string $path): int
     {
@@ -48,7 +51,10 @@ class LinuxAdapter implements AdapterInterface
 
     public function getCoreCount(): int
     {
-        return $this->propertyCache['core_count'] ??= (int) trim(shell_exec('nproc --all'));
+        if (!isset($this->propertyCache['core_count'])) {
+            $this->propertyCache['core_count'] = (int) trim(shell_exec('nproc --all'));
+        }
+        return $this->propertyCache['core_count'];
     }
 
     public function getLoad1(): ?float
@@ -95,7 +101,10 @@ class LinuxAdapter implements AdapterInterface
 
     private function getMeminfoEntry(string $name): ?int
     {
-        $memInfo = $this->propertyCache['meminfos'] ??= $this->parseMeminfos();
+        if (!isset($this->propertyCache['meminfos'])) {
+            $this->propertyCache['meminfos'] = $this->parseMeminfos();
+        }
+        $memInfo = $this->propertyCache['meminfos'];
 
         return $memInfo[$name] ?? null;
     }
@@ -108,8 +117,12 @@ class LinuxAdapter implements AdapterInterface
 
         $memInfos = [];
         foreach ($lines as $line) {
-            [$key, $value] = explode(':', $line);
-            $memInfos[$key] = (int) preg_replace('/\D/', '', $value);
+            $parts = explode(':', $line, 2);
+            if (count($parts) === 2) {
+                $key = $parts[0];
+                $value = $parts[1];
+                $memInfos[$key] = (int) preg_replace('/\D/', '', $value);
+            }
         }
 
         return $memInfos;
@@ -118,7 +131,10 @@ class LinuxAdapter implements AdapterInterface
 
     private function getOsRelease(string $key): ?string
     {
-        $osRelease = $this->propertyCache['os_release'] ??= $this->parseOsRelease();
+        if (!isset($this->propertyCache['os_release'])) {
+            $this->propertyCache['os_release'] = $this->parseOsRelease();
+        }
+        $osRelease = $this->propertyCache['os_release'];
 
         return $osRelease[$key] ?? null;
     }
@@ -150,8 +166,12 @@ class LinuxAdapter implements AdapterInterface
 
         $osRelease = [];
         foreach ($lines as $line) {
-            [$key, $value] = explode('=', $line);
-            $osRelease[$key] = trim($value, '"');
+            $parts = explode('=', $line, 2);
+            if (count($parts) === 2) {
+                $key = $parts[0];
+                $value = $parts[1];
+                $osRelease[$key] = trim($value, '"');
+            }
         }
 
         return $osRelease;

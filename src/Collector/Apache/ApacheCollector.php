@@ -21,16 +21,19 @@ use Jmonitor\Exceptions\CollectorException;
  */
 class ApacheCollector extends AbstractCollector
 {
-    private string $modStatusUrl;
+    /**
+     * @var string
+     */
+    private $modStatusUrl;
 
     /**
      * @var array<string, mixed>
      */
-    private array $datas = [];
+    private $datas = [];
 
     public function __construct(string $modStatusUrl)
     {
-        if (str_starts_with($modStatusUrl, 'http') && !str_ends_with($modStatusUrl, '?auto')) {
+        if (substr($modStatusUrl, 0, 4) === 'http' && substr($modStatusUrl, -5) !== '?auto') {
             $modStatusUrl .= '?auto';
         }
 
@@ -73,8 +76,9 @@ class ApacheCollector extends AbstractCollector
 
     /**
      * testing purpose
+     * @return string|false
      */
-    private function getModStatusContent(): string|false
+    private function getModStatusContent()
     {
         return file_get_contents($this->modStatusUrl);
     }

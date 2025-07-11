@@ -17,7 +17,10 @@ use Doctrine\DBAL\Connection;
 
 class DoctrineAdapter implements MysqlAdapterInterface
 {
-    private Connection $connection;
+    /**
+     * @var Connection
+     */
+    private $connection;
 
     public function __construct(Connection $connection)
     {

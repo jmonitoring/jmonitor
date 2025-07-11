@@ -18,7 +18,10 @@ use Jmonitor\Collector\Mysql\Adapter\MysqlAdapterInterface;
 
 class MysqlStatusCollector extends AbstractCollector
 {
-    private MysqlAdapterInterface $db;
+    /**
+     * @var MysqlAdapterInterface
+     */
+    private $db;
 
     private const GLOBAL_VARIABLES = [
         'Uptime',

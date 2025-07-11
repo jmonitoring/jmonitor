@@ -17,7 +17,10 @@ interface CollectorInterface
 {
     public function beforeCollect(): void;
 
-    public function collect(): mixed;
+    /**
+     * @return mixed
+     */
+    public function collect();
 
     public function afterCollect(): void;
 

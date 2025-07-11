@@ -17,7 +17,10 @@ use Jmonitor\Exceptions\CollectorException;
 
 class PdoAdapter implements MysqlAdapterInterface
 {
-    private \PDO $pdo;
+    /**
+     * @var \PDO
+     */
+    private $pdo;
 
     public function __construct(\PDO $pdo)
     {

@@ -20,9 +20,15 @@ use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 class RedisCollector extends AbstractCollector
 {
-    private \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|Relay $redis;
+    /**
+     * @var \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|Relay
+     */
+    private $redis;
 
-    public function __construct(\Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|Relay|string $redis)
+    /**
+     * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface|Relay|string $redis
+     */
+    public function __construct($redis)
     {
         if (is_string($redis) && class_exists(RedisAdapter::class)) {
             $redis = RedisAdapter::createConnection($redis);
@@ -129,7 +135,7 @@ class RedisCollector extends AbstractCollector
     private function getDatabases(array $infos): \Traversable
     {
         foreach ($infos as $k => $v) {
-            if (str_starts_with($k, 'db')) {
+            if (substr($k, 0, 2) === 'db') {
                 yield $k => $v;
             }
         }
