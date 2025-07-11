@@ -17,13 +17,6 @@ use Jmonitor\Collector\AbstractCollector;
 
 class PhpCollector extends AbstractCollector
 {
-    private ?string $fpmStatusUrl;
-
-    public function __construct(?string $fpmStatusUrl = null)
-    {
-        $this->fpmStatusUrl = $fpmStatusUrl;
-    }
-
     public function collect(): array
     {
         return [
@@ -37,7 +30,7 @@ class PhpCollector extends AbstractCollector
             'date.timezone' => ini_get('date.timezone'),
             'loaded_extensions' => get_loaded_extensions(),
             'opcache' => $this->getOpcacheInfos(),
-            'fpm' => 'TODO', // TODO
+            'fpm' => $this->getFpm(),
         ];
     }
 
@@ -89,5 +82,14 @@ class PhpCollector extends AbstractCollector
     public function getName(): string
     {
         return 'php';
+    }
+
+    private function getFpm(): array
+    {
+        if (!function_exists('fpm_get_status')) {
+            return [];
+        }
+
+        return fpm_get_status();
     }
 }
