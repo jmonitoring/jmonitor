@@ -40,6 +40,10 @@ class Jmonitor
 
     public function collect(): ResponseInterface
     {
+        if (count($this->collectors) === 0) {
+            throw new \RuntimeException('Please add some collectors before sending metrics.');
+        }
+
         $metrics = [];
 
         foreach ($this->collectors as $collector) {
@@ -55,14 +59,6 @@ class Jmonitor
             ];
 
             $collector->afterCollect();
-        }
-
-        if (count($metrics) === 0) {
-            if (count($this->collectors) === 0) {
-                throw new \RuntimeException('Please add some collectors before sending metrics.');
-            }
-
-            throw new \RuntimeException('All collectors failed to collect data.'); // @phpstan-ignore-line
         }
 
         return $this->client->sendMetrics($metrics);
