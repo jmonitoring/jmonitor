@@ -13,7 +13,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.3",
+        "php": "^7.3|^8.0",
         "php-http/discovery": "^1.17",
         "psr/http-client": "^1.0",
         "psr/http-client-implementation": "*",
@@ -21,6 +21,7 @@
     },
     "require-dev": {
         "ext-pdo": "*",
+        "ext-json": "*",
         "doctrine/dbal": "^3.0|^4.2",
         "nyholm/psr7": "^1.8",
         "php-http/message": "^1.0",
@@ -47,9 +48,6 @@
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": false
-        },
-        "platform": {
-            "php": "7.3"
         }
     },
     "scripts": {
