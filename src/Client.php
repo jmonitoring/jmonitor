@@ -111,6 +111,8 @@ class Client
         return [
             'X-JMONITOR-VERSION' => Jmonitor::VERSION,
             'X-JMONITOR-API-KEY' => $this->projectApiKey,
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
         ];
     }
 }

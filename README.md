@@ -82,6 +82,7 @@ Collectors
   use Jmonitor\Collector\Mysql\Adapter\DoctrineAdapter;
   use Jmonitor\Collector\Mysql\MysqlStatusCollector;
   use Jmonitor\Collector\Mysql\MysqlVariablesCollector;
+  use Jmonitor\Collector\Mysql\MysqlQueriesCountCollector;
   
   // with PDO
   $adapter = new PdoAdapter($pdo); // retrieve your \PDO connection
@@ -92,6 +93,7 @@ Collectors
   // Mysql has multiple collectors, use the same adapter for all of them
   $collector = new MysqlStatusCollector($adapter);
   $collector = new MysqlVariablesCollector($adapter);
+  $collector = new MysqlQueriesCountCollector($adapter, 'your_db_name');
   ```
 
 - ### Php
