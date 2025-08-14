@@ -37,6 +37,15 @@ class MysqlVariablesCollector extends AbstractCollector
         'join_buffer_size',     // a checker
         'thread_cache_size',        // a checker
         'table_open_cache',
+        'character_set_client',  // a checker
+        'character_set_connection',  // a checker
+        'character_set_database',  // a checker
+        'character_set_results',  // a checker
+        'character_set_server',  // a checker
+        'character_set_system',  // a checker
+        'collation_connection',  // a checker
+        'collation_server',  // a checker
+        'collation_server',  // a checker
     ];
 
     /**
