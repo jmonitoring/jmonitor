@@ -13,7 +13,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "ext-json": "*",
         "php-http/discovery": "^1.17",
         "psr/http-client": "^1.0",
@@ -23,6 +23,7 @@
     "require-dev": {
         "ext-pdo": "*",
         "doctrine/dbal": "^3.0|^4.2",
+        "friendsofphp/php-cs-fixer": "^3.86",
         "nyholm/psr7": "^1.8",
         "php-http/message": "^1.0",
         "phpstan/phpstan": "^1.10",
@@ -51,6 +52,9 @@
         }
     },
     "scripts": {
-        "phpstan": "./vendor/bin/phpstan"
+        "lint:check": "./vendor/bin/php-cs-fixer check --verbose --config=.php-cs-fixer.dist.php --using-cache=no --diff",
+        "lint:fix": "./vendor/bin/php-cs-fixer fix --verbose --config=.php-cs-fixer.dist.php --using-cache=no  --diff",
+        "phpstan": "./vendor/bin/phpstan",
+        "test": "./vendor/bin/phpunit tests"
     }
 }

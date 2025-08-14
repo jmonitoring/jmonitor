@@ -61,7 +61,7 @@ class Client
      */
     public function sendMetrics($metrics): ResponseInterface
     {
-        $request = $this->createRequest('POST', $this->baseUrl.'/metrics', $this->buildHeaders(), json_encode($metrics));
+        $request = $this->createRequest('POST', $this->baseUrl . '/metrics', $this->buildHeaders(), json_encode($metrics));
 
         return $this->sendRequest($request);
     }

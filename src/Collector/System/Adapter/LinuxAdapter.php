@@ -74,7 +74,7 @@ class LinuxAdapter implements AdapterInterface
 
     public function getOsPrettyName(): ?string
     {
-        return $this->getOsRelease('PRETTY_NAME') ?: (trim($this->getOsRelease('NAME').' '.$this->getOsRelease('VERSION')));
+        return $this->getOsRelease('PRETTY_NAME') ?: (trim($this->getOsRelease('NAME') . ' ' . $this->getOsRelease('VERSION')));
     }
 
     public function getUptime(): ?int

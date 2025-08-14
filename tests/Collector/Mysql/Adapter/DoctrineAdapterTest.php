@@ -40,7 +40,7 @@ class DoctrineAdapterTest extends TestCase
         $query = "SELECT * FROM table";
         $expectedResult = [
             ['id' => 1, 'name' => 'Test 1'],
-            ['id' => 2, 'name' => 'Test 2']
+            ['id' => 2, 'name' => 'Test 2'],
         ];
 
         // Configuration du mock Connection

@@ -26,7 +26,7 @@ class MysqlVariablesCollectorTest extends TestCase
             ['Variable_name' => 'version', 'Value' => '8.0.23'],
             ['Variable_name' => 'time_zone', 'Value' => 'SYSTEM'],
             ['Variable_name' => 'slow_query_log', 'Value' => 'OFF'],
-            ['Variable_name' => 'table_open_cache', 'Value' => '2000']
+            ['Variable_name' => 'table_open_cache', 'Value' => '2000'],
         ];
 
         $dbMock->expects($this->once())
@@ -39,7 +39,7 @@ class MysqlVariablesCollectorTest extends TestCase
             'version' => '8.0.23',
             'time_zone' => 'SYSTEM',
             'slow_query_log' => 'OFF',
-            'table_open_cache' => '2000'
+            'table_open_cache' => '2000',
         ];
 
         $collector = new MysqlVariablesCollector($dbMock);

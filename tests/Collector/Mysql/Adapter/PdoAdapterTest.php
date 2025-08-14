@@ -40,7 +40,7 @@ class PdoAdapterTest extends TestCase
         $params = ['param1' => 'value1'];
         $expectedResult = [
             ['id' => 1, 'name' => 'Test 1'],
-            ['id' => 2, 'name' => 'Test 2']
+            ['id' => 2, 'name' => 'Test 2'],
         ];
 
         // Mock du PDOStatement

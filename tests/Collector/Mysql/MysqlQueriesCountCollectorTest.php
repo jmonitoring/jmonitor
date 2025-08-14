@@ -27,8 +27,8 @@ class MysqlQueriesCountCollectorTest extends TestCase
                 'total_select_queries' => 150,
                 'total_insert_queries' => 50,
                 'total_update_queries' => 30,
-                'total_delete_queries' => 20
-            ]
+                'total_delete_queries' => 20,
+            ],
         ];
 
         $dbMock->expects($this->once())

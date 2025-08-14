@@ -26,7 +26,7 @@ class MysqlStatusCollectorTest extends TestCase
             ['Variable_name' => 'Threads_connected', 'Value' => '10'],
             ['Variable_name' => 'Threads_running', 'Value' => '2'],
             ['Variable_name' => 'Questions', 'Value' => '1000'],
-            ['Variable_name' => 'Com_select', 'Value' => '800']
+            ['Variable_name' => 'Com_select', 'Value' => '800'],
         ];
 
         $dbMock->expects($this->once())
@@ -39,7 +39,7 @@ class MysqlStatusCollectorTest extends TestCase
             'Threads_connected' => '10',
             'Threads_running' => '2',
             'Questions' => '1000',
-            'Com_select' => '800'
+            'Com_select' => '800',
         ];
 
         $collector = new MysqlStatusCollector($dbMock);

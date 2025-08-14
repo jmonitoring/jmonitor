@@ -71,7 +71,5 @@ class RandomAdapter implements AdapterInterface
         return random_int(3600, 1000 * 3600);
     }
 
-    public function reset(): void
-    {
-    }
+    public function reset(): void {}
 }

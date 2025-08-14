@@ -23,7 +23,7 @@ class ApacheCollectorTest extends TestCase
 
     public function setUp(): void
     {
-        $this->collector = new ApacheCollector(__DIR__.'/_fake_mod_status_content.txt');
+        $this->collector = new ApacheCollector(__DIR__ . '/_fake_mod_status_content.txt');
     }
 
     public function testCollect(): void

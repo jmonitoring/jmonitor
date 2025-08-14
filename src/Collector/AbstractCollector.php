@@ -15,11 +15,7 @@ namespace Jmonitor\Collector;
 
 abstract class AbstractCollector implements CollectorInterface
 {
-    public function beforeCollect(): void
-    {
-    }
+    public function beforeCollect(): void {}
 
-    public function afterCollect(): void
-    {
-    }
+    public function afterCollect(): void {}
 }

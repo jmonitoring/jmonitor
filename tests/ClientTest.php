@@ -21,7 +21,7 @@ class ClientTest extends TestCase
                     'metric2' => 200,
                 ],
                 'time' => 0.123,
-            ]
+            ],
         ];
 
         $mockResponse = new MockResponse('', [
@@ -37,7 +37,7 @@ class ClientTest extends TestCase
         $expectedRequestHeaders = [
             'Host: collector.jmonitor.io',
             'X-JMONITOR-VERSION: 1.0',
-            'X-JMONITOR-API-KEY: test-api-key'
+            'X-JMONITOR-API-KEY: test-api-key',
         ];
 
         $this->assertSame('POST', $mockResponse->getRequestMethod());
